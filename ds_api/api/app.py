@@ -1,7 +1,8 @@
 from flask import Flask, request
 from controllers import Word_splitter as ws, range_controller as rc
+from controllers import tweet_controller as tc
 from flask.json import jsonify
-
+import json
 app = Flask(__name__)
 
 @app.route('/split/<word>',)
@@ -12,6 +13,23 @@ def split(word):
 def ranges():
     json = request.get_json()
     return jsonify(rc.ranges(int(json['start']),int(json['end'])))
+
+
+
+@app.route('/get_tweets/<keyword>')
+def get_tweets(keyword):
+    twc = tc.TweetController()
+    path = twc.get_tweets_and_save(keyword)
+    json = jsonify(path)
+    return path
+
+
+@app.route('/analyze',methods=['POST'])
+def analyze_tweets():
+    path = request.values.get('path')
+    twc = tc.TweetController()
+    result = twc.tweets_sentiment(path)
+    return jsonify(result)
 
 
 if __name__ == '__main__':
