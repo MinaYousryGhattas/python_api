@@ -31,6 +31,14 @@ def analyze_tweets():
     result = twc.tweets_sentiment(path)
     return jsonify(result)
 
+@app.route('/analyze_source',methods=['POST'])
+def tweet_analysis_source():
+    path = request.values.get('path')
+    twc = tc.TweetController()
+    result = twc.tweets_analysis(path)
+    return jsonify(result)
+
+
 
 if __name__ == '__main__':
     app.run(port='1001',depug=True)

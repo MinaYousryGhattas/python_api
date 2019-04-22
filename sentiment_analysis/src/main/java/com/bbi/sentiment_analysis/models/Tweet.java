@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Tweet {
     String text;
     String sentiment;
+    int counter;
 
     public Tweet() {
     }

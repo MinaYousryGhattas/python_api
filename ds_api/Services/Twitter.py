@@ -59,7 +59,7 @@ class TwitterClient(object):
 			return 'negative'
 
 	def get_all_tweets(self,query):
-		return self.api.search(q=query)
+		return self.api.search(q=query,count=2000)
 
 
 	def get_tweets(self, query, count=10):
